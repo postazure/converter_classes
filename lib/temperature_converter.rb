@@ -13,40 +13,26 @@ class TemperatureConverter
   end
 
   def to_celsius
-    if @unit == :celsius
-      converted_value  = @value
-    elsif @unit == :kelvin
-      converted_value = @value - 273.15
-    elsif @unit == :fahrenheit
-      converted_value = (@value - 32.0)* (5.0/9.0)
-
-    end
-
-    converted_value
+    {
+      celsius: @value,
+      kelvin: (@value-273.15),
+      fahrenheit: ((@value - 32.0)* (5.0/9.0))
+    }[@unit]
   end
 
   def to_fahrenheit
-    if @unit == :fahrenheit
-      converted_value = @value
-    elsif @unit == :celsius
-      converted_value = @value *(9.0/5.0) +32.0
-    elsif @unit == :kelvin
-      converted_value = (@value- 273.15) *(9.0/5.0) +32.0
-
-    end
-
-    converted_value
+    {
+      celsius: @value *(9.0/5.0) +32.0,
+      kelvin: (@value- 273.15) *(9.0/5.0) +32.0,
+      fahrenheit: @value
+    }[@unit]
   end
 
   def to_kelvin
-    if @unit == :kelvin
-      converted_value = @value
-    elsif @unit == :celsius
-      converted_value = @value + 273.15
-    elsif @unit == :fahrenheit
-      converted_value = (@value-32.0)/1.8 +273.15
-    end
-
-    converted_value
+    {
+      celsius: @value + 273.15,
+      kelvin: @value,
+      fahrenheit: (@value-32.0)/1.8 +273.15
+    }[@unit]
   end
 end
